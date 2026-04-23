@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Application Communale - Portail des Services</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f6f9;
+  color: #333;
+}
+
+header {
+  background: #1f4e79;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+.lang-switch {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.lang-switch button {
+  background: white;
+  color: #1f4e79;
+  border: none;
+  padding: 6px 10px;
+  margin-left: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.btn {
+  display: inline-block;
+  background: #1f4e79;
+  color: white;
+  padding: 12px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.btn:hover {
+  background: #163a5c;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #ddd;
+  margin-top: 40px;
+}
+
+.ar {
+  direction: rtl;
+  text-align: right;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="lang-switch">
+    <button onclick="setLang('fr')">FR</button>
+    <button onclick="setLang('ar')">AR</button>
+  </div>
+
+  <h1 id="title">Portail numérique des services de la commune de Sousse</h1>
+  <p id="subtitle">Votre application officielle d'accès aux services municipaux</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2 id="t1">📱 Télécharger l'application</h2>
+    <p id="p1">Accédez à tous les services de la commune de Sousse directement depuis votre téléphone.</p>
+    <a class="btn" href="https://drive.google.com/file/d/1ruUipdn8_akBBcPpO-Sal6ii41327VDn/view?usp=sharing">
+      Télécharger l'APK
+    </a>
+  </div>
+
+  <div class="card">
+    <h2 id="t2">ℹ️ À propos</h2>
+    <p id="p2">
+      Cette application facilite l’accès des citoyens de Sousse aux services municipaux et aux informations locales.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2 id="t3">⭐ Fonctionnalités</h2>
+    <ul id="list"></ul>
+  </div>
+
+  <div class="card">
+    <h2 id="t4">📞 Contact</h2>
+    <p id="contactText"></p>
+  </div>
+
+</div>
+
+<footer id="footer"></footer>
+
+<script>
+const content = {
+  fr: {
+    title: "Portail numérique des services de la commune de Sousse",
+    subtitle: "Votre application officielle d'accès aux services municipaux",
+    t1: "📱 Télécharger l'application",
+    p1: "Accédez à tous les services de la commune de Sousse directement depuis votre téléphone.",
+    t2: "ℹ️ À propos",
+    p2: "Cette application facilite l’accès des citoyens aux services municipaux et aux informations locales.",
+    t3: "⭐ Fonctionnalités",
+    t4: "📞 Contact",
+    contactText: "Avenue Mohamed V 4000 Sousse Tunisie<br>Tél/Fax : +216 70 161 700<br>Email : municipalite@sousse.tn",
+    footer: "© 2026 - Application Communale. Tous droits réservés.",
+    list: [
+      "Accès au site web de la commune de sousse et aux actualités",
+      "Accès à un géoportail interactif",
+      "Soumission de réclamations en ligne",
+      "Consultation des horaires de collecte des déchets",
+      "Découverte des sites d’intérêt via une carte touristique interactive",
+      "Partage de photos pour valoriser le patrimoine local",
+      "Recherche des adresses et des noms de rues",
+      "Accès au plan d’aménagement de la commune"
+    ]
+  },
+
+  ar: {
+    title: "بوابة الخدمات الرقمية لبلدية سوسة",
+    subtitle: "تطبيقكم الرسمي للوصول إلى الخدمات البلدية",
+    t1: "📱 تحميل التطبيق",
+    p1: "الوصول إلى جميع خدمات بلدية سوسة مباشرة من هاتفك.",
+    t2: "ℹ️ حول التطبيق",
+    p2: "يهدف هذا التطبيق إلى تسهيل وصول المواطنين إلى الخدمات البلدية والمعلومات المحلية.",
+    t3: "⭐ الميزات",
+    t4: "📞 الاتصال",
+    contactText: "العنوان: شارع محمد الخامس 4000 سوسة<br>الهاتف/الفاكس : 21670161700<br>العنوان الإلكتروني : municipalite@sousse.tn",
+    footer: "© 2026 بلدية سوسة. جميع الحقوق محفوظة.",
+    list: [
+      "الوصول إلى الموقع الرسمي للبلدية",
+      "الوصول إلى بوابة الجغرفة الرقمية",
+      "تقديم الشكاوى و المقترحات",
+      "متابعة أوقات جمع الفضلات",
+      "استكشاف المعالم الأثرية عبر خريطة تفاعلية",
+      "مشاركة الصور لتوثيق التراث",
+      "البحث عن العناوين وأسماء الشوارع",
+      "مثال التهيئة العمرانية"
+    ]
+  }
+};
+
+function setLang(lang) {
+  document.getElementById("title").innerText = content[lang].title;
+  document.getElementById("subtitle").innerText = content[lang].subtitle;
+  document.getElementById("t1").innerText = content[lang].t1;
+  document.getElementById("p1").innerText = content[lang].p1;
+  document.getElementById("t2").innerText = content[lang].t2;
+  document.getElementById("p2").innerText = content[lang].p2;
+  document.getElementById("t3").innerText = content[lang].t3;
+  document.getElementById("t4").innerText = content[lang].t4;
+  document.getElementById("contactText").innerHTML = content[lang].contactText;
+  document.getElementById("footer").innerText = content[lang].footer;
+
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+  content[lang].list.forEach(item => {
+    const li = document.createElement("li");
+    li.innerText = item;
+    list.appendChild(li);
+  });
+
+  if(lang === "ar") document.body.classList.add("ar");
+  else document.body.classList.remove("ar");
+}
+
+setLang("fr");
+</script>
+
+</body>
+</html>
